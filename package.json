@@ -1,0 +1,21 @@
+{
+  "name": "crawl_facebook",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w --pretty",
+    "start": "node main.js",
+    "build": "rm -r dist && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1"
+  }
+}
