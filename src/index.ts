@@ -1,11 +1,15 @@
 import puppeteer from 'puppeteer';
 import { config } from 'dotenv';
+import login from './login'
+import crawl from './crawl';
 
 config();
 
 const IS_DEV: boolean = process.env.DEV == "true" || false;
 const fbID: string = process.env.FACEBOOK_ID || '';
 const fbPW: string = process.env.FACEBOOK_PW || '';
+
+const FACEBOOK_DOMAIN = 'https://m.facebook.com';
 
 export async function run() {
     const browser = await puppeteer.launch({
@@ -18,50 +22,15 @@ export async function run() {
         width: 1200,
         height: 800
     });
-    await page.goto('https://m.facebook.com');
-    await page.type('#m_login_email', fbID);
-    const pw = '#m_login_password';
-    try {
-        await page.type(pw, fbPW);
-        await page.click('#u_0_5');
-    } catch (e) {
-        const emailLogin = '#login_form > div._2pie > div:nth-child(1) > button';
-        await page.waitForSelector(emailLogin)
-        await page.click(emailLogin)
+    await page.goto(FACEBOOK_DOMAIN);
 
-        await page.waitForSelector(pw)
-        await page.type(pw, fbPW);
-        await page.click('#u_0_6');
-    }
+    await login(page, fbID, fbPW);
 
-    const notNow = '#root > div._7om2 > div > div > div._7om2._2pip > div:nth-child(1) > div > div';
+    const newFeeds = await crawl(page);
 
-    await page.waitForSelector(notNow)
-    await page.click(notNow);
-
-    await page.waitFor('#u_0_w');//my profile
-    await autoScroll(page);
-
-    // NOTE: Theree is one more div in the internal post.
-    //#u_s_c > div > div > header > div._4g34._5i2i._52we > div > div > div._4g34 > div > a
-    const postATagSelector = 'div > header > div._4g34._5i2i._52we > div > div > div._4g34 > div > a';
-    const postATags = await page.$$(postATagSelector);
-    const aTagHrefs = [];
-    for (let i = 1; i < postATags.length; i++) {
-        const aTag = postATags[i];
-        const tags = await page.evaluate(e => e.href, aTag);
-        aTagHrefs.push(tags);
-    }
-    // const postATags = await page.$$eval(postATagSelector, es => {
-    //     console.log(es)
-    //     return es.map(e => {
-    //         console.log((<any>e).href); return e
-    //     })
-    // });
-
-    // const postURLs = await postATags.map(async e => await (await e.getProperty('textContent')).jsonValue())
-
-    console.log(aTagHrefs);
+    newFeeds.forEach(nf => {
+        console.log(nf.url);
+    })
     console.log(1232131);
     // await page.
     // await browser.close();
