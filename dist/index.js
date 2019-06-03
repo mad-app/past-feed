@@ -16,7 +16,6 @@ const dotenv_1 = require("dotenv");
 const login_1 = __importDefault(require("./login"));
 const crawl_1 = __importDefault(require("./crawl"));
 dotenv_1.config();
-const IS_DEV = process.env.DEV == "true" || false;
 const fbID = process.env.FACEBOOK_ID || '';
 const fbPW = process.env.FACEBOOK_PW || '';
 const FACEBOOK_DOMAIN = 'https://m.facebook.com';
@@ -40,33 +39,7 @@ function run() {
         });
         console.log(1232131);
         // await page.
-        // await browser.close();
+        yield browser.close();
     });
 }
 exports.run = run;
-//TODO: check "There are no more posts to show right now" message.#MNewsFeed > div > div > div > span 
-function autoScroll(page) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const interval = IS_DEV ? 30 : 1000;
-        yield sleep(IS_DEV ? 1000 : 5000);
-        yield page.evaluate(`(async (isDev, interval) => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-
-                if(totalHeight >= scrollHeight || (isDev && totalHeight >= 6000){
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 50);
-        });
-    })()`, IS_DEV, interval);
-    });
-}
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
