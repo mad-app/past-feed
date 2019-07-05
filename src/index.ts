@@ -5,14 +5,15 @@ import crawl from './crawl';
 
 config();
 
-const fbID: string = process.env.FACEBOOK_ID || '';
-const fbPW: string = process.env.FACEBOOK_PW || '';
+const FB_ID: string = process.env.FACEBOOK_ID || '';
+const FB_PW: string = process.env.FACEBOOK_PW || '';
+const IS_DEV: boolean = process.env.DEV == "true" || false;
 
 const FACEBOOK_DOMAIN = 'https://m.facebook.com';
 
 export async function run() {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: !IS_DEV,
         slowMo: 10,
         devtools: true,
         userDataDir: "./user_data"
@@ -24,7 +25,7 @@ export async function run() {
     });
     await page.goto(FACEBOOK_DOMAIN);
 
-    await login(page, fbID, fbPW);
+    await login(page, FB_ID, FB_PW);
 
     const newFeeds = await crawl(page);
 
