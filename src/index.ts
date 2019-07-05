@@ -31,7 +31,6 @@ export async function run() {
     newFeeds.forEach(nf => {
         console.log(nf.url);
     })
-    console.log(1232131);
     // await page.
     await browser.close();
 }
