@@ -15,6 +15,7 @@ export async function run() {
         headless: false,
         slowMo: 10,
         devtools: true,
+        userDataDir: "./user_data"
     });
     const page = await browser.newPage();
     await page.setViewport({

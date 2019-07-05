@@ -4,12 +4,8 @@ import { NewsFeed } from './crawlTypes';
 const IS_DEV: boolean = process.env.DEV == "true" || false;
 
 export default async function (page: Page): Promise<NewsFeed[]> {
-    const notNowTag = '#root > div._7om2 > div > div > div._7om2._2pip > div:nth-child(1) > div > div';
-
-    await page.waitForSelector(notNowTag)
-    await page.click(notNowTag);
-
     await page.waitFor('#u_0_w');//my profile
+
     await autoScroll(page);
 
     // NOTE: Theree is one more div in the internal post.
