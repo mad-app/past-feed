@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  past-feed:
+    build:
+      context: .
+      dockerfile: images/past-feed.Dockerfile
+    container_name: past-feed
+    # image: past-feed
+    volumes: 
+      - ./user_data:/work/user_data
+    environment:
+      # - DEV=${DEV}
+      - FACEBOOK_ID=${FACEBOOK_ID}
+      - FACEBOOK_PW=${FACEBOOK_PW}

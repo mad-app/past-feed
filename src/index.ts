@@ -7,16 +7,25 @@ config();
 
 const FB_ID: string = process.env.FACEBOOK_ID || '';
 const FB_PW: string = process.env.FACEBOOK_PW || '';
-const IS_DEV: boolean = process.env.DEV == "true" || false;
+const IS_DEV: boolean = (process.env.DEV || "false") == "true";
 
 const FACEBOOK_DOMAIN = 'https://m.facebook.com';
 
 export async function run() {
+    const devArgs = {
+        args: IS_DEV ?
+            [] :
+            ['--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage']
+
+    }
     const browser = await puppeteer.launch({
         headless: !IS_DEV,
         slowMo: 10,
         devtools: true,
-        userDataDir: "./user_data"
+        userDataDir: "./user_data",
+        ...devArgs
     });
     const page = await browser.newPage();
     await page.setViewport({

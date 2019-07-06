@@ -7,6 +7,7 @@
     "watch": "tsc -w --pretty",
     "start": "node main.js",
     "build": "rm -r dist && tsc",
+    "docker-build": "docker build -f ./images/past-feed.Dockerfile -t past-feed:latest .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

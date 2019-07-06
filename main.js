@@ -1,3 +1,9 @@
 const { run } = require('./lib');
 
-run();
+
+function main() {
+    console.log("start past-feed")
+    run();
+}
+
+main();
