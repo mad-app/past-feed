@@ -2,9 +2,12 @@ import puppeteer from 'puppeteer';
 import { config } from 'dotenv';
 import login from './login'
 import crawl from './crawl';
+import { getDatabse } from './db';
+import save from './save';
 
 config();
 
+console.log('id', process.env.DATABASE_ID)
 const FB_ID: string = process.env.FACEBOOK_ID || '';
 const FB_PW: string = process.env.FACEBOOK_PW || '';
 const IS_DEV: boolean = (process.env.DEV || "false") == "true";
@@ -36,11 +39,11 @@ export async function run() {
 
     await login(page, FB_ID, FB_PW);
 
-    const newFeeds = await crawl(page);
+    const newsFeeds = await crawl(page);
+    console.log("newsFeeds! ", newsFeeds.length)
 
-    newFeeds.forEach(nf => {
-        console.log(nf.url);
-    })
+    const saveNewsFeedCount = await save(newsFeeds);
+    console.log("save! ", saveNewsFeedCount)
     // await page.
     await browser.close();
 }

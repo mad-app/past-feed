@@ -1,5 +1,8 @@
 import { Page } from 'puppeteer';
-import { NewsFeed } from './crawlTypes';
+import { NewsFeed } from './db/model';
+import { config } from 'dotenv';
+
+config();
 
 const IS_DEV: boolean = process.env.DEV == "true" || false;
 
@@ -16,9 +19,7 @@ export default async function (page: Page): Promise<NewsFeed[]> {
     for (let i = 1; i < postATags.length; i++) {
         const aTag = postATags[i];
         const tags = await page.evaluate(e => e.href, aTag);
-        const newFeed = {
-            url: tags
-        }
+        const newFeed = new NewsFeed(tags)
         newsFeeds.push(newFeed);
     }
 
