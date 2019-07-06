@@ -26,7 +26,7 @@ export async function run() {
         headless: !IS_DEV,
         slowMo: 10,
         devtools: true,
-        userDataDir: "./user_data",
+        userDataDir: "./output/user_data",
         ...devArgs
     });
     const page = await browser.newPage();

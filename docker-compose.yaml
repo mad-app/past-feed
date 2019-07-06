@@ -8,7 +8,7 @@ services:
     container_name: past-feed
     image: past-feed
     volumes: 
-      - ./user_data:/work/user_data
+      - ./output/user_data:/work/user_data
     environment:
       # - DEV=${DEV}
       - FACEBOOK_ID=${FACEBOOK_ID}
@@ -27,7 +27,7 @@ services:
     ports:
       - 5984:5984
     volumes:
-      - ./db-data:/opt/couchdb/data
+      - ./output/db-data:/opt/couchdb/data
     environment:
       # - DEV=${DEV}
       - COUCHDB_USER=${DATABASE_ID}
