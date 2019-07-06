@@ -1,15 +1,36 @@
 version: "3"
 
+networks:
+  past-feed-net:
+
 services:
   past-feed:
-    build:
-      context: .
-      dockerfile: images/past-feed.Dockerfile
     container_name: past-feed
-    # image: past-feed
+    image: past-feed
     volumes: 
       - ./user_data:/work/user_data
     environment:
       # - DEV=${DEV}
       - FACEBOOK_ID=${FACEBOOK_ID}
       - FACEBOOK_PW=${FACEBOOK_PW}
+      - DATABASE_URL=past-feed-db:5984
+      - DATABASE_ID=${DATABASE_ID}
+      - DATABASE_PW=${DATABASE_PW}
+    networks: 
+      past-feed-net:
+    depends_on:
+      - past-feed-db
+  
+  past-feed-db:
+    image: couchdb
+    container_name: past-feed-database
+    ports:
+      - 5984:5984
+    volumes:
+      - ./db-data:/opt/couchdb/data
+    environment:
+      # - DEV=${DEV}
+      - COUCHDB_USER=${DATABASE_ID}
+      - COUCHDB_PASSWORD=${DATABASE_PW}
+    networks: 
+      past-feed-net:
