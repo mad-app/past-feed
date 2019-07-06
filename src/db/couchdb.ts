@@ -16,7 +16,8 @@ export class CouchDB {
     setup = async () => {
         const list = await couchDB.list();
         if(!list.includes(DB_NAME)) {
-            couchDB.create(DB_NAME)
+            console.log(`create ${DB_NAME} database`)
+            await couchDB.create(DB_NAME)
         }
     }
 
@@ -30,7 +31,7 @@ export class CouchDB {
             }
             return response.ok
         } catch (e) {
-            return false
+            throw e
         }
     }
 }

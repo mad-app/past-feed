@@ -9,17 +9,21 @@ export default async function (newsFeeds: NewsFeed[]) {
         let runCount = 1;
         let savedCount = 0;
         for (let i = 0; i < count; i++) {
-            db.insert(newsFeeds[i]).then(saved => {
-                if (saved) {
-                    savedCount++;
-                }
-            }).finally(() => {
-                if (runCount == count) {
-                    res(savedCount)
-                } else {
-                    runCount++;
-                }
-            });
+            console.log(newsFeeds[i].url)
+            db.insert(newsFeeds[i])
+                .then(saved => {
+                    if (saved) {
+                        savedCount++;
+                    }
+                }).catch(e => {
+                    console.log('insert error: ', e)
+                }).finally(() => {
+                    if (runCount == count) {
+                        res(savedCount)
+                    } else {
+                        runCount++;
+                    }
+                });
         }
     })
 }
