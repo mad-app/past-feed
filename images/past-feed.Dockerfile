@@ -1,5 +1,5 @@
 FROM buildkite/puppeteer:latest
-LABEL maintainer="pdpxpd@gmail.com"
+LABEL maintainer="5pecia1 <pdpxpd@gmail.com>"
 
 COPY ./ /work
 

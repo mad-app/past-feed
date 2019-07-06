@@ -7,7 +7,7 @@
     "watch": "tsc -w --pretty",
     "start": "node main.js",
     "build": "rm -r dist && tsc",
-    "docker-build": "doker build -f ./images/past-feed.Dockerfile -t past-feed:latest .",
+    "docker-build": "docker build -f ./images/past-feed.Dockerfile -t past-feed:latest .",
     "docker-compose-up": "docker-compose up -d",
     "docker-compose-down": "docker-compose down -v",
     "test": "echo \"Error: no test specified\" && exit 1"
