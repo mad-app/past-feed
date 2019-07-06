@@ -1,5 +1,5 @@
-import { NewsFeed } from "./db/model";
-import { getDatabse } from "./db";
+import { NewsFeed } from "../db/model";
+import { getDatabse } from "../db";
 
 export default async function (newsFeeds: NewsFeed[]) {
     return new Promise(async (res) => {

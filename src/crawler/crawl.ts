@@ -1,5 +1,5 @@
 import { Page } from 'puppeteer';
-import { NewsFeed } from './db/model';
+import { NewsFeed } from '../db/model';
 import { config } from 'dotenv';
 
 config();
