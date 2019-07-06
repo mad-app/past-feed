@@ -2,7 +2,6 @@ import puppeteer from 'puppeteer';
 import { config } from 'dotenv';
 import login from './login'
 import crawl from './crawl';
-import { getDatabse } from './db';
 import save from './save';
 
 config();
@@ -44,6 +43,6 @@ export async function run() {
 
     const saveNewsFeedCount = await save(newsFeeds);
     console.log("save! ", saveNewsFeedCount)
-    // await page.
+
     await browser.close();
 }
