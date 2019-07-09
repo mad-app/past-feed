@@ -2,7 +2,7 @@ import nano from 'nano'
 import URL from 'url'
 import querystring from 'querystring'
 
-const PARAMS = ["view", "id", "story_fbid"]
+const PARAMS = ["view", "id", "story_fbid", "bid"]
 
 function parseUrl(url: string): string {
     const parsed = URL.parse(url);
