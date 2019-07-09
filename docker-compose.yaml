@@ -28,7 +28,7 @@ services:
     image: couchdb
     container_name: past-feed-database
     ports:
-      - 5984:5984
+      - ${PAST_FEED_DB_PORT}:5984
     volumes:
       - ./output/db-data:/opt/couchdb/data
     environment:
