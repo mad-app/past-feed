@@ -16,7 +16,7 @@ export default async function (newsFeeds: NewsFeed[]) {
                         savedCount++;
                     }
                 }).catch(e => {
-                    console.log('insert error: ', e)
+                    // console.log('insert error: ', e)
                 }).finally(() => {
                     if (runCount == count) {
                         res(savedCount)
