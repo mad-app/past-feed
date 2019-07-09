@@ -6,7 +6,6 @@ import save from './save';
 
 config();
 
-console.log('id', process.env.DATABASE_ID)
 const FB_ID: string = process.env.FACEBOOK_ID || '';
 const FB_PW: string = process.env.FACEBOOK_PW || '';
 const IS_DEV: boolean = (process.env.DEV || "false") == "true";

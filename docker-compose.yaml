@@ -16,6 +16,9 @@ services:
       - DATABASE_URL=past-feed-db:5984
       - DATABASE_ID=${DATABASE_ID}
       - DATABASE_PW=${DATABASE_PW}
+      - SERVER_PORT=${SERVER_PORT}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
     networks: 
       past-feed-net:
     depends_on:
