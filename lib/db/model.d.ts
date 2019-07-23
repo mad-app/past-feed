@@ -9,6 +9,7 @@ export declare class NewsFeed implements BaseNewsFeed {
     url: string;
     rawUrl: string;
     read: boolean;
+    datetime: number;
     constructor(url: string);
     processAPIResponse(response: nano.DocumentInsertResponse): void;
 }

@@ -28,6 +28,7 @@ export class NewsFeed implements BaseNewsFeed {
     url: string
     rawUrl: string
     read: boolean
+    datetime: number
 
     constructor(url: string) {
         this.rawUrl = url
@@ -35,6 +36,8 @@ export class NewsFeed implements BaseNewsFeed {
         this._id = this.url
         this._rev = undefined
         this.read = false
+        let d = new Date();
+        this.datetime = d.getTime();
     }
 
     processAPIResponse(response: nano.DocumentInsertResponse) {
@@ -43,5 +46,4 @@ export class NewsFeed implements BaseNewsFeed {
             this._rev = response.rev
         }
     }
-
 }
